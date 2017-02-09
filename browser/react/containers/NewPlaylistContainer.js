@@ -13,24 +13,28 @@ export default class NewPlaylistContainer extends Component {
     }
 
     handleChange (evt) {
-        this.setState({
-            inputValue: evt.target.value
-        })
+        if(evt.target.value.length >16 || evt.target.value.length === 0){
+
+        } else {
+            this.setState({
+                inputValue: evt.target.value
+            })
+        }
         console.log(this.state.inputValue)
     }
 
     handleSubmit (evt) {
-        //console.log(this.state.inputValue)
-        console.log(evt)
+        evt.preventDefault()
         this.setState({
             inputValue: ''
         })
+        console.log(this.state.inputValue)
     }
 
     render() {
         return (
             <div>
-                <NewPlaylist handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
+                <NewPlaylist handleSubmit={this.handleSubmit} handleChange={this.handleChange} inputValue={this.state.inputValue} />
             </div>
         )
 

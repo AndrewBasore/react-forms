@@ -10,7 +10,7 @@ const NewPlaylist = function (props) {
             <div className="form-group">
                 <label className="col-xs-2 control-label">Name</label>
                 <div className="col-xs-10">
-                <input className="form-control" type="text" onChange={props.handleChange} />
+                <input className="form-control" type="text" onChange={props.handleChange} value={props.inputValue} />
                 </div>
             </div>
             <div className="form-group">
