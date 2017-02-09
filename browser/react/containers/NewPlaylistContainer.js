@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import NewPlaylist from '../components/NewPlaylist'
+import axios from "axios";
 
 export default class NewPlaylistContainer extends Component {
     constructor(){
         super()
         this.state = {
-            inputValue: ''
+            inputValue: '',
+            disabled: true
         }
         console.log(this.state)
         this.handleChange = this.handleChange.bind(this)
@@ -13,12 +15,17 @@ export default class NewPlaylistContainer extends Component {
     }
 
     handleChange (evt) {
+        this.setState({
+            inputValue: evt.target.value
+        })
         if(evt.target.value.length >16 || evt.target.value.length === 0){
-
+            this.setState({
+                disabled: true
+            });
         } else {
             this.setState({
-                inputValue: evt.target.value
-            })
+                disabled: false
+            });
         }
         console.log(this.state.inputValue)
     }
@@ -28,13 +35,13 @@ export default class NewPlaylistContainer extends Component {
         this.setState({
             inputValue: ''
         })
-        console.log(this.state.inputValue)
+        this.props.addPlaylist(this.state.inputValue)
     }
 
     render() {
         return (
             <div>
-                <NewPlaylist handleSubmit={this.handleSubmit} handleChange={this.handleChange} inputValue={this.state.inputValue} />
+                <NewPlaylist handleSubmit={this.handleSubmit} handleChange={this.handleChange} inputValue={this.state.inputValue}  disabled={this.state.disabled}/>
             </div>
         )
 
